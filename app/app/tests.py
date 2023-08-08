@@ -14,3 +14,4 @@ class CalcTest(SimpleTestCase):
         """Test that values are subtracted and returned"""
         self.assertEqual(subtract(11, 5), 6)
         print("Test 2 passed")
+        
