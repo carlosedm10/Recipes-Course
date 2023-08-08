@@ -1,7 +1,10 @@
 ---
 name: Checks
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
 
 jobs:
   test-lint:
@@ -9,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Login to Docker Hub
-      - uses: docker/login-action@v1
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
