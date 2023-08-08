@@ -1,0 +1,17 @@
+# Ignore Git files and directories
+.git
+.gitignore
+
+# Ignore Docker hidden file
+.docker
+
+# Ignore Python cache
+app/__pycache__/
+app/*/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+
+# Ignore virtual environment
+.env/
+.venv/
+venv/
