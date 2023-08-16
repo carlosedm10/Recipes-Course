@@ -25,8 +25,9 @@ stop:
 migrate:
 	$(MANAGE) migrate"
 
+.PHONY: app
 app:
-	$(MANAGE) startapp $(APP_NAME)"
+	docker-compose run --rm app sh -c "python manage.py startapp $(filter-out $@,$(MAKECMDGOALS))"
 
 makemigrations:
 	docker-compose run --rm app sh -c "python manage.py makemigrations"
