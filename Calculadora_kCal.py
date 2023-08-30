@@ -46,7 +46,7 @@ if sexo == "H":
 # ---------------------------------- For women: ----------------------------------------
 # Calculating kcal
 if sexo == "M":
-    kcal_b = 655+(9.6*peso + 1.8*altura - 4.7*edad)
+    kcal_b = 655 + (9.6 * peso + 1.8 * altura - 4.7 * edad)
     if act == 1:
         kcal = kcal_b * 1.5
     elif act == 2:
@@ -71,6 +71,8 @@ if sexo == "M":
         lip = (kcal * 0.3) / 9
         carb = (kcal - (prot * 4 + lip * 9)) / 4
 
-#----------------------------OUTPUTS----------------------------------
+# ----------------------------OUTPUTS----------------------------------
 print(f"Tus calorias ideales son: {str(round(kcal))}kCal")
-print(f"Tus Macros ideales son: {str(round(prot))}g de proteina, {str(round(carb))}g de carbohidratos, y {str(round(lip))}g de grasas")
+print(
+    f"Tus Macros ideales son: {str(round(prot))}g de proteina, {str(round(carb))}g de carbohidratos, y {str(round(lip))}g de grasas"
+)

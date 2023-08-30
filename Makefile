@@ -45,3 +45,9 @@ run-tests:
 
 create-superuser:
 	docker-compose run --rm app sh -c "python manage.py createsuperuser"
+
+
+format-all:
+	docker exec personal_projects-app-1  sh -c "python -m black --line-length 79 --preview api/"
+# docker exec personal_projects-app-1  sh -c "python -m autoflake --exclude=node_modules/ --remove-all-unused-imports --in-place ./**/**/*.py"
+# 	docker exec personal_projects-app-1  sh -c "python -m isort --profile black -l 79 api/"
