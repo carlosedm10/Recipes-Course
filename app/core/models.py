@@ -57,11 +57,11 @@ class Recipe(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )  # the user that owns the recipe.
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     time_minutes = models.IntegerField(blank=True, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     link = models.CharField(
-        max_length=255, blank=True
+        max_length=255, blank=True, null=True
     )  # the link to the recipe (optional).
 
     def __str__(self):

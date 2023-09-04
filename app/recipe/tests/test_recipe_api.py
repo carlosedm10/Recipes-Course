@@ -2,10 +2,9 @@
 Tests for recipe APIs
 """
 from decimal import Decimal
-from urllib import response
 
-from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 from django.urls import reverse
 
 from rest_framework import status
@@ -30,12 +29,14 @@ def create_recipe(user, **params):
         "time_minutes": 10,
         "price": Decimal("5.20"),
         "description": "Sample description",
+        "link": "http://example.com/recipe.pdf",
     }
     defaults.update(
         params
     )  # update the defaults with the params passed in the function.
 
-    return Recipe.objects.create(user=user, **defaults)
+    recipe = Recipe.objects.create(user=user, **defaults)
+    return recipe
 
 
 class PublicRecipeApiTests(TestCase):
@@ -125,14 +126,15 @@ class PrivateRecipeApiTests(TestCase):
         }
 
         response = self.client.post(RECIPES_URL, payload)
+        print(response)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         recipe = Recipe.objects.get(id=response.data["id"])
 
-        for key in payload.keys():
-            self.assertEqual(payload[key], getattr(recipe, key))
+        for k, v in payload.items():
+            self.assertEqual(getattr(recipe, k), v)
 
         self.assertEqual(recipe.user, self.user)
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         print("Test creating recipe: OK")

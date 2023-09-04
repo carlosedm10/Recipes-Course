@@ -1,7 +1,6 @@
 """
 Tests for the Django admin modifications
 """
-from webbrowser import get
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse

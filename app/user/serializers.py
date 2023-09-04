@@ -6,18 +6,17 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 
 
-class UserSerializer(
-    serializers.ModelSerializer
-):  # ModelSerializer is a serializer that converts the JSON data into a python object
+# ModelSerializer is a serializer that converts the JSON data into a python object
+class UserSerializer(serializers.ModelSerializer):
     """Serializer for the users object."""
 
     class Meta:  # Meta class allows us to configure the ModelSerializer.
         model = get_user_model()
-        fields = (
+        fields = [
             "email",
             "password",
             "name",
-        )  # Here we should only include the fields that we want to make accessible in the API so the user can change them.
+        ]  # Here we should only include the fields that we want to make accessible in the API so the user can change them.
         extra_kwargs = {"password": {"write_only": True, "min_length": 5}}
 
     def create(

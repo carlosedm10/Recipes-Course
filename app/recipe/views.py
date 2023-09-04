@@ -1,5 +1,5 @@
 """
-Viewa for recipe APIs
+Views for recipe APIs
 """
 
 from rest_framework import viewsets
@@ -23,7 +23,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Return objects for the current authenticated user only."""
+        """Return recipes for authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by("-id")
 
     # this method is used to determine which serializer class to use for the request.
