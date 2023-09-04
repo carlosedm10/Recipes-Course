@@ -11,6 +11,7 @@ router = DefaultRouter()
 router.register("recipes", views.RecipeViewSet)
 # The first argument is the name of the URL that we want to create.
 # The second argument is the viewset that we want to register with the router.
+router.register("tags", views.TagViewSet)
 
 app_name = "recipe"
 
