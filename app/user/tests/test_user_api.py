@@ -155,6 +155,7 @@ class PrivateUserApiTests(TestCase):
 
     def test_retrieve_profile_success(self):
         """Test retrieving profile for logged in user."""
+        print("Testing retrieve profile...")
         response = self.client.get(ME_URL)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -165,15 +166,19 @@ class PrivateUserApiTests(TestCase):
                 "email": self.user.email,
             },
         )  # We are checking that the response data is the same as the user data.
+        print("Retrieve profile test: OK")
 
     def test_post_me_not_allowed(self):
         """Test that POST is not allowed on the me endpoint."""
+        print("Testing POST not allowed on the me endpoint...")
         response = self.client.post(ME_URL, {})
 
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        print("POST not allowed on the me endpoint test: OK")
 
     def test_update_user_profile(self):
         """Test updating the user profile for authenticated user."""
+        print("Testing update user profile...")
         payload = {"name": "New name", "password": "Newpass123"}
         response = self.client.patch(ME_URL, payload)
 
@@ -181,3 +186,4 @@ class PrivateUserApiTests(TestCase):
         self.assertEqual(self.user.name, payload["name"])
         self.assertTrue(self.user.check_password(payload["password"]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print("Update user profile test: OK")
