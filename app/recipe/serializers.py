@@ -70,8 +70,11 @@ class RecipeSerializer(serializers.ModelSerializer):
             "tags", []
         )  # We pop the tags, removing them from the validated data.
 
+        ingredients = validated_data.pop("ingredients", [])
         recipe = Recipe.objects.create(**validated_data)  # We create the recipe.
 
+        self._get_or_create_tags(tags, recipe)
+        self._get_or_create_ingredients(ingredients, recipe)
         self._get_or_create_tags(tags, recipe)
         return recipe
 
