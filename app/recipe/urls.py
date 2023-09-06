@@ -8,10 +8,11 @@ from rest_framework.routers import DefaultRouter
 from recipe import views
 
 router = DefaultRouter()
-router.register("recipes", views.RecipeViewSet)
 # The first argument is the name of the URL that we want to create.
 # The second argument is the viewset that we want to register with the router.
+router.register("recipes", views.RecipeViewSet)
 router.register("tags", views.TagViewSet)
+router.register("ingredients", views.IngredientViewSet)
 
 app_name = "recipe"
 
