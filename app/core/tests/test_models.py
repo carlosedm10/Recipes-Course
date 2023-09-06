@@ -1,7 +1,7 @@
 """Test form models"""
-from random import sample
-
+from unittest.mock import patch
 from decimal import Decimal
+import uuid
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
@@ -96,3 +96,16 @@ class ModelTests(TestCase):
 
         self.assertEqual(str(ingredient), ingredient.name)  # __str__ method
         print("Create ingrediente test: OK")
+
+    @patch(
+        "core.models.uuid.uuid4"
+    )  # we patch the uuid4 function to return a fixed value instead of a random one.
+    def test_recipe_file_name_uuid(self, mock_uuid):
+        """Test generating image path"""
+        uuid = "test-uuid"  # here we mock it
+        mock_uuid.return_value = uuid  # here we return the value
+        file_path = models.recipe_image_file_path(
+            None, "example.jpg"
+        )  # creating he function that creates the path
+
+        self.assertEqual(file_path, f"uploads/recipe/{uuid}.jpg")

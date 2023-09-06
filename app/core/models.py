@@ -1,15 +1,28 @@
 """
 Database models
 """
+import uuid
+import os
+
 from django.conf import settings
 from collections import UserDict
-import email
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin,
 )
+
+
+def recipe_image_file_path(instance, filename):
+    """Generate file path for new recipe image."""
+    ext = os.path.splitext(filename)[1]  # get the extension of the file.
+    filename = f"{uuid.uuid4()}{ext}"  # generate a random filename.
+
+    return os.path.join("uploads/recipe/", filename)  # return the path.
+
+
+# NOTE: Using os module to join the path is better than using string concatenation because it will work on any operating system.
 
 
 class UserManager(BaseUserManager):
@@ -69,6 +82,10 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(
         "Ingredient"
     )  # the ingredient(s) that are associated with the recipe.
+
+    image = models.ImageField(
+        null=True, upload_to=recipe_image_file_path
+    )  # We are specifying the path where the image will be uploaded.
 
     def __str__(self):
         return self.title
