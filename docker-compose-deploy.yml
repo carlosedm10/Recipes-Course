@@ -7,7 +7,7 @@ services:
     restart: always
     volumes:
       - static-data:/vol/web
-    enviroment:
+    environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
@@ -23,7 +23,7 @@ db:
   restart: always
   volumes:
     - postgres_data:/var/lib/postgresql/data/
-  enviroment:
+  environment:
     - POSTGRES_DB=${DB_NAME}
     - POSTGRES_USER=${DB_USER}
     - POSTGRES_PASSWORD=${DB_PASS}
@@ -35,10 +35,10 @@ proxy:
   depends_on:
     - app
   ports:
-    - 8000:8000
+    - 80:8000
   volumes:
     - static-data:/vol/static
 
 volumes:
-  postgres_data:
+  postgres-data:
   static-data:
