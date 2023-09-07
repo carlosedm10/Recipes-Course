@@ -22,6 +22,9 @@ restart:
 stop:
 	docker compose -f $(DOCKER_COMPOSE_DEV) down
 
+up:
+	docker compose -f $(DOCKER_COMPOSE_DEV) up
+
 migrate:
 	$(MANAGE) migrate"
 
@@ -31,6 +34,9 @@ app:
 
 makemigrations:
 	docker-compose run --rm app sh -c "python manage.py makemigrations"
+
+migrate:
+	docker-compose run --rm app sh -c "python manage.py migrate"
 
 showmigrations:
 	$(MANAGE) showmigrations"
